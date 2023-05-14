@@ -1,0 +1,59 @@
+{
+    "status": "success",
+    "result": {
+        "id": "mon",
+        "dayName": "Pondělí",
+        "items": [
+            {
+                "id": "D90gKF7I",
+                "product": "Rohlíky",
+                "amount": 10,
+                "unit": "ks",
+                "done": true
+            },
+            {
+                "id": "F3jVjJTG",
+                "product": "Máslo",
+                "amount": 500,
+                "unit": "g",
+                "done": false
+            },
+            {
+                "id": "vUhZpKu5",
+                "product": "Šunka",
+                "amount": 2,
+                "unit": "balení",
+                "done": false
+            },
+            {
+                "id": "uqQHCOHp",
+                "product": "Eidem",
+                "amount": 1,
+                "unit": "balení",
+                "done": false
+            },
+            {
+                "id": "gRy7nj0R",
+                "product": "Rajčata",
+                "amount": 400,
+                "unit": "g",
+                "done": true
+            },
+            {
+                "id": "ywjIIcax",
+                "product": "Okurky",
+                "amount": 2,
+                "unit": "ks",
+                "done": true
+            },
+            {
+                "id": "PQacUJqB",
+                "product": "Cibule",
+                "amount": 6,
+                "unit": "ks",
+                "done": true
+            }
+        ],
+        "url": "https://nakupy.kodim.app/api/sampleweek/mon"
+    }
+}
