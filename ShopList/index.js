@@ -18,6 +18,7 @@ export const ShopList = (props) => {
       <h2 class="shoplist__day">${dayName}</h2>
       <div class="shoplist__toolbar">
         <button class="reset-btn">Obnovit</button>
+        <button class="clear-btn">Vymazat</button>
       </div>
     </div>
     <form class="shoplist__new">
@@ -77,10 +78,12 @@ export const ShopList = (props) => {
       .then((data) => {
         console.log(data)
         if (data.status === 'success') {
-          element.replaceWith(ShopList({
-            day: day,
-            dayResult: data.result
-          }))
+          element.replaceWith(
+            ShopList({
+              day: day,
+              dayResult: data.result
+            })
+          )
         } else {
           console.error('CHYBA!!!')
           console.log(...data.errors.map(er => er.detail))
@@ -93,7 +96,7 @@ export const ShopList = (props) => {
     .addEventListener('submit', handleSubmit)
 
   const handleReset = () => {
-    console.log('button funguje')
+    console.log('button reset funguje')
     fetch(`https://nakupy.kodim.app/api/me/week/${day}/actions`, {
       method: 'POST',
       headers: {
@@ -108,12 +111,12 @@ export const ShopList = (props) => {
       .then((data) => {
         console.log(data)
         if (data.status === 'success') {
-          element.replaceWith(ShopList(
-            {
+          element.replaceWith(
+            ShopList({
               day: day,
               dayResult: data.result
-            }
-          ))
+            })
+          )
         } else {
           console.log('chyba')
         }
@@ -123,6 +126,37 @@ export const ShopList = (props) => {
   element
     .querySelector('.reset-btn')
     .addEventListener('click', handleReset)
+
+  const handleClear = () => {
+    console.log('button clear funguje')
+    fetch(`https://nakupy.kodim.app/api/me/week/${day}/actions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        type: 'clear',
+      })
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          element.replaceWith(
+            ShopList({
+              day: day,
+              dayResult: data.result,
+            })
+          )
+        } else {
+          console.log('chyba')
+        }
+      })
+  }
+
+  element
+    .querySelector('.clear-btn')
+    .addEventListener('click', handleClear)
 
   const listItemElms = dayResult.items.map(item => ListItem(item))
   element.querySelector('.shoplist__items').append(...listItemElms)
